@@ -39,17 +39,13 @@ import matplotlib.dates as mdates
 
 #Plot the close price
 plt.figure(figsize=(12,6))
-plt.plot(df['Close'], label=f'{stock} Close Price', linewidth=2)
+plt.plot(df['Date'], df['Close'], label=f'{stock} Close Price', linewidth=2)
 plt.title(f'{stock} Close Price History')
 plt.xlabel('Date')
-
 plt.ylabel('Close Price USD ($)')
 plt.legend()
-
-# Format x-axis with readable dates
 ax = plt.gca()
 ax.xaxis.set_major_locator(mdates.AutoDateLocator())
-ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))  # Show year-month-day
 plt.xticks(fontsize=8, rotation=0)
 plt.tight_layout()
 plt.show()
@@ -57,16 +53,13 @@ plt.show()
 
 #Plot the Open price
 plt.figure(figsize=(12,6))
-plt.plot(df['Open'], label=f'{stock} Open Price', linewidth=2)
+plt.plot(df['Date'], df['Open'], label=f'{stock} Open Price', linewidth=2)
 plt.title(f'{stock} Open Price History')
 plt.xlabel('Date')
 plt.ylabel('Open Price USD ($)')
 plt.legend()
-
-# Format x-axis with readable dates
 ax = plt.gca()
 ax.xaxis.set_major_locator(mdates.AutoDateLocator())
-ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))  # Show year-month-day
 plt.xticks(fontsize=8, rotation=0)
 plt.tight_layout()
 plt.show()
@@ -74,16 +67,13 @@ plt.show()
 
 #Plot the Day - High price
 plt.figure(figsize=(12,6))
-plt.plot(df['Low'], label=f'{stock} Low prices', linewidth=2)
+plt.plot(df['Date'], df['Low'], label=f'{stock} Low prices', linewidth=2)
 plt.title(f'{stock} Low prices')
 plt.xlabel('Date')
 plt.ylabel('Low prices USD ($)')
 plt.legend()
-
-# Format x-axis with readable dates
 ax = plt.gca()
 ax.xaxis.set_major_locator(mdates.AutoDateLocator())
-ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))  # Show year-month-day
 plt.xticks(fontsize=8, rotation=0)
 plt.tight_layout()
 plt.show()
@@ -91,16 +81,13 @@ plt.show()
 
 #Plot the Day - Low price
 plt.figure(figsize=(12,6))
-plt.plot(df['Volume'], label=f'{stock}Volume', linewidth=2)
+plt.plot(df['Date'], df['Volume'], label=f'{stock} Volume', linewidth=2)
 plt.title(f'{stock} Volume')
 plt.xlabel('Date')
 plt.ylabel('Volume')
 plt.legend()
-
-# Format x-axis with readable dates
 ax = plt.gca()
 ax.xaxis.set_major_locator(mdates.AutoDateLocator())
-ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))  # Show year-month-day
 plt.xticks(fontsize=8, rotation=0)
 plt.tight_layout()
 plt.show()
@@ -111,13 +98,37 @@ ma100 = df.Close.rolling(100).mean()
 ma200 = df.Close.rolling(200).mean()
 
 plt.figure(figsize=(12,6))
-plt.plot(df.Close, label=f'{stock} Close Price', linewidth=1)
-plt.plot(ma100, label=f'{stock} 100-Day MA', linewidth=1)
-plt.plot(ma200, label=f'{stock} 200-Day MA', linewidth=1)
+plt.plot(df['Date'], df['Close'], label=f'{stock} Close Price', linewidth=1)
+plt.plot(df['Date'], ma100, label=f'{stock} 100-Day MA', linewidth=1)
+plt.plot(df['Date'], ma200, label=f'{stock} 200-Day MA', linewidth=1)
 plt.title(f'{stock} Moving Averages')
 plt.xlabel('Date')
 plt.ylabel('Close Price USD ($)')
 plt.legend()
+ax = plt.gca()
+ax.xaxis.set_major_locator(mdates.AutoDateLocator())
+plt.xticks(fontsize=8, rotation=0)
+plt.tight_layout()
 plt.show()
 
 
+ema100 = df.Close.ewm(span=100, adjust=False).mean()
+ema200 = df.Close.ewm(span=200, adjust=False).mean()
+
+plt.figure(figsize=(12,6))
+plt.plot(df['Date'], df['Close'], label=f'{stock} Close Price', linewidth=1)
+plt.plot(df['Date'], ema100, label=f'{stock} Exponential 100-Day MA', linewidth=1)
+plt.plot(df['Date'], ema200, label=f'{stock} Exponential 200-Day MA', linewidth=1)
+plt.title(f'{stock} Exponential Moving Averages')
+plt.xlabel('Date')
+plt.ylabel('Close Price USD ($)')
+plt.legend()
+ax = plt.gca()
+ax.xaxis.set_major_locator(mdates.AutoDateLocator())
+plt.xticks(fontsize=8, rotation=0)
+plt.tight_layout()
+plt.show()
+
+
+#Trainning and Testing the model
+dataTraining = pd.DataFrame(df.Close[0:int(len(df)*0.70)])
