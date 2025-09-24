@@ -3,7 +3,7 @@ from datetime import datetime
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
 import yfinance as yf
 import pandas_datareader as data
@@ -132,3 +132,94 @@ plt.show()
 
 #Trainning and Testing the model
 dataTraining = pd.DataFrame(df.Close[0:int(len(df)*0.70)])
+dataTesting = pd.DataFrame(df.Close[int(len(df)*0.70) : int(len(df))])
+
+scaler = MinMaxScaler(feature_range=(0,1))
+dataTrainingArray = scaler.fit_transform(dataTraining)
+
+x_train = []
+y_train = []
+
+for i in range(100, dataTrainingArray.shape[0]):
+    x_train.append(dataTrainingArray[i-100:i])
+    y_train.append(dataTrainingArray[i, 0])
+
+x_train, y_train  = np.array(x_train), np.array(y_train)
+
+print(x_train.shape)
+print(y_train.shape)
+
+
+#Model Building
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, LSTM
+
+model = Sequential()
+model.add(LSTM(units = 50, activation = 'relu', return_sequences = True, input_shape = (x_train.shape[1],1)))
+model.add(Dropout(0.2))
+
+model.add(LSTM(units = 60, activation = 'relu', return_sequences = True))
+model.add(Dropout(0.3))
+
+model.add(LSTM(units = 80, activation = 'relu', return_sequences = True))
+model.add(Dropout(0.4))
+
+model.add(LSTM(units = 120, activation = 'relu'))
+model.add(Dropout(0.5))
+
+model.add(Dense(units = 1))
+
+
+model.summary()
+
+
+# Add EarlyStopping callback
+from keras.callbacks import EarlyStopping
+early_stop = EarlyStopping(monitor='loss', patience=5, restore_best_weights=True)
+
+model.compile(optimizer='adam', loss='mean_squared_error')
+model.fit(x_train, y_train, epochs=30, callbacks=[early_stop])
+
+
+past100days = dataTraining.tail(100)
+final_df = pd.concat([past100days, dataTesting], ignore_index=True)
+input_data = scaler.fit_transform(final_df)
+
+x_test = []
+y_test = []
+
+for i in range(100, input_data.shape[0]):
+    x_test.append(input_data[i-100:i])
+    y_test.append(input_data[i, 0]) 
+
+
+x_test, y_test = np.array(x_test), np.array(y_test)
+print(x_test.shape)
+
+y_predicted = model.predict(x_test)
+
+scaler.scale_
+scaler_factor = 1 / 0.0035166
+
+y_predicted = y_predicted * scaler_factor
+y_test = y_test * scaler_factor
+
+scaler.scale_
+scaler_factor = 1 / 0.0035166
+y_predicted = y_predicted * scaler_factor
+y_test = y_test * scaler_factor
+
+#Final Graph
+plt.figure(figsize=(12, 6))
+plt.plot(y_test, label = 'Original Price', linewidth = 1)
+plt.plot(y_predicted, label = 'Predicted Price', linewidth = 1)
+plt.legend()
+plt.show()
+
+
+
+
+
+
+
+
