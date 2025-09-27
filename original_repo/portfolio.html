@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Portfolio Manager</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background: #f4f4f4; }
+    input { margin: 5px; padding: 6px; }
+    button { padding: 6px 12px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>📈 Portfolio Manager</h1>
+
+  <div>
+    <input type="text" id="ticker" placeholder="Ticker (e.g. AAPL)">
+    <input type="number" id="shares" placeholder="Shares">
+    <button onclick="addStock()">Add</button>
+  </div>
+
+  <table id="portfolioTable">
+    <thead>
+      <tr>
+        <th>Ticker</th>
+        <th>Shares</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script src="portfolio.js"></script>
+</body>
+</html>
