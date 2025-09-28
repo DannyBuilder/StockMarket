@@ -205,7 +205,7 @@ plt.legend()
 plt.show()
 
 
-
+#####HERE#####
 
 past100days = dataTraining.tail(100)
 final_df = pd.concat([past100days, dataTesting], ignore_index=True)
@@ -251,6 +251,27 @@ plt.show()
 
 tomorrow_price = y_predicted_actual[-1]
 print("Predicted price for tomorrow:", tomorrow_price)
+
+#Test how well the model did
+
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+import numpy as np
+
+y_true = y_test_actual.flatten()
+y_pred = y_predicted_actual.flatten()
+
+# Mean Absolute Error
+mae = mean_absolute_error(y_true, y_pred)
+
+# Root Mean Squared Error
+rmse = np.sqrt(mean_squared_error(y_true, y_pred))
+
+# R^2 Score
+r2 = r2_score(y_true, y_pred)
+
+print(f"MAE: {mae:.2f} USD")
+print(f"RMSE: {rmse:.2f} USD")
+print(f"R^2 Score: {r2:.4f}")
 
 
 
