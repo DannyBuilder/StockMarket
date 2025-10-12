@@ -7,3 +7,5 @@ scikit-learn
 keras
 tensorflow
 plotly
+flask
+requests

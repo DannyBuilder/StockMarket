@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Portfolio Manager</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1><i class="fas fa-chart-line"></i> Portfolio Manager</h1>
+        <p>Track your investments with real-time data and beautiful analytics</p>
+    </div>
+
+    <div class="alert alert-success" id="successAlert"></div>
+    <div class="alert alert-error" id="errorAlert"></div>
+
+    <div class="dashboard">
+        <!-- Portfolio Summary -->
+        <div class="card">
+            <h2><i class="fas fa-wallet"></i> Portfolio Summary</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalValue">$0.00</div>
+                    <div class="stat-label">Total Value</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="cash">$0.00</div>
+                    <div class="stat-label">Cash</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="gainLoss" class="positive">$0.00</div>
+                    <div class="stat-label">Total P&L</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="gainLossPercent" class="positive">0.00%</div>
+                    <div class="stat-label">Total Return</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Stock Form -->
+        <div class="card">
+            <h2><i class="fas fa-plus-circle"></i> Add Stock</h2>
+            <form id="addStockForm">
+                <div class="form-group">
+                    <label for="symbol">Stock Symbol</label>
+                    <input type="text" id="symbol" placeholder="e.g., AAPL" required>
+                </div>
+                <div class="form-group">
+                    <label for="shares">Number of Shares</label>
+                    <input type="number" id="shares" placeholder="e.g., 10" min="1" required>
+                </div>
+                <button type="submit" class="btn"><i class="fas fa-plus"></i> Add to Portfolio</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Portfolio Chart -->
+    <div class="card">
+        <h2><i class="fas fa-chart-area"></i> Portfolio Performance</h2>
+        <div class="chart-container">
+            <div id="portfolioChart"></div>
+        </div>
+    </div>
+
+    <!-- Current Positions -->
+    <div class="card">
+        <h2><i class="fas fa-list"></i> Current Positions</h2>
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Loading positions...</p>
+        </div>
+        <table class="positions-table" id="positionsTable" style="display:none;">
+            <thead>
+                <tr>
+                    <th>Symbol</th><th>Company</th><th>Shares</th><th>Avg Price</th><th>Current Price</th>
+                    <th>Market Value</th><th>P&L</th><th>YTD %</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="positionsBody">
+            </tbody>
+        </table>
+    </div>
+
+<script src="/static/script.js"></script>
+</body>
+</html>

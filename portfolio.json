@@ -1,0 +1,200 @@
+{
+  "stocks": {
+    "AAPL": {
+      "shares": 5,
+      "avg_price": 243.61,
+      "total_cost": 1218.05
+    },
+    "MSFT": {
+      "shares": 3,
+      "avg_price": 510.96,
+      "total_cost": 1532.88
+    },
+    "TSLA": {
+      "shares": 1,
+      "avg_price": 413.49,
+      "total_cost": 413.49
+    },
+    "AMD": {
+      "shares": 18,
+      "avg_price": 150,
+      "total_cost": 2700
+    },
+    "SPGI": {
+      "shares": 1,
+      "avg_price": 486.1,
+      "total_cost": 486.1
+    }
+  },
+  "cash": 2472.9799999999996,
+  "transactions": [
+    {
+      "date": "2025-10-11T00:40:27.402621",
+      "type": "BUY",
+      "symbol": "AAPL",
+      "shares": 5,
+      "price": 100,
+      "total": 1226.3500000000001
+    },
+    {
+      "date": "2025-10-11T00:40:28.019059",
+      "type": "BUY",
+      "symbol": "MSFT",
+      "shares": 3,
+      "price": 510.96,
+      "total": 1532.8799999999999
+    },
+    {
+      "date": "2025-10-11T00:40:28.535896",
+      "type": "BUY",
+      "symbol": "GOOGL",
+      "shares": 2,
+      "price": 236.57,
+      "total": 473.14
+    },
+    {
+      "date": "2025-10-11T00:40:29.043371",
+      "type": "BUY",
+      "symbol": "TSLA",
+      "shares": 1,
+      "price": 413.49,
+      "total": 413.49
+    },
+    {
+      "date": "2025-10-11T00:43:47.011622",
+      "type": "BUY",
+      "symbol": "AMD",
+      "shares": 1,
+      "price": 214.9,
+      "total": 214.9
+    },
+    {
+      "date": "2025-10-11T00:44:02.613774",
+      "type": "BUY",
+      "symbol": "AMD",
+      "shares": 10,
+      "price": 214.9,
+      "total": 2149.0
+    },
+    {
+      "date": "2025-10-11T00:44:51.935626",
+      "type": "BUY",
+      "symbol": "AAPL",
+      "shares": 1,
+      "price": 230.0,
+      "total": 245.27
+    },
+    {
+      "date": "2025-10-11T00:48:12.253418",
+      "type": "BUY",
+      "symbol": "AMD",
+      "shares": 5,
+      "price": 214.9,
+      "total": 1074.5
+    },
+    {
+      "date": "2025-10-12T22:09:53.548952",
+      "type": "BUY",
+      "symbol": "AAPL",
+      "shares": 1,
+      "price": 245.27,
+      "total": 245.27
+    },
+    {
+      "date": "2025-10-12T22:10:02.104844",
+      "type": "BUY",
+      "symbol": "AMD",
+      "shares": 2,
+      "price": 214.9,
+      "total": 429.8
+    },
+    {
+      "date": "2025-10-12T22:14:19.485413",
+      "type": "BUY",
+      "symbol": "AAPL",
+      "shares": 1,
+      "price": 245.27,
+      "total": 245.27
+    },
+    {
+      "date": "2025-10-12T22:16:28.291702",
+      "type": "BUY",
+      "symbol": "AAPL",
+      "shares": 1,
+      "price": 245.27,
+      "total": 245.27
+    },
+    {
+      "date": "2025-10-12T22:17:28.194398",
+      "type": "SELL",
+      "symbol": "AAPL",
+      "shares": 8,
+      "price": 245.27,
+      "total": 1962.16
+    },
+    {
+      "date": "2025-10-12T22:19:02.892801",
+      "type": "BUY",
+      "symbol": "AAPL",
+      "shares": 3,
+      "price": 245.27,
+      "total": 735.81
+    },
+    {
+      "date": "2025-10-12T22:23:46.732290",
+      "type": "SELL",
+      "symbol": "AAPL",
+      "shares": 1,
+      "price": 245.27,
+      "total": 245.27
+    },
+    {
+      "date": "2025-10-12T22:24:01.496374",
+      "type": "BUY",
+      "symbol": "AAPL",
+      "shares": 100,
+      "price": 245.27,
+      "total": 24527.0
+    },
+    {
+      "date": "2025-10-12T22:27:42.744944",
+      "type": "SELL",
+      "symbol": "AAPL",
+      "shares": 100,
+      "price": 245.27,
+      "total": 24527.0
+    },
+    {
+      "date": "2025-10-12T22:51:20.547953",
+      "type": "BUY",
+      "symbol": "SPGI",
+      "shares": 1,
+      "price": 486.1,
+      "total": 486.1
+    },
+    {
+      "date": "2025-10-12T22:56:43.881384",
+      "type": "BUY",
+      "symbol": "AAPL",
+      "shares": 1,
+      "price": 245.27,
+      "total": 245.27
+    },
+    {
+      "date": "2025-10-12T22:56:50.305710",
+      "type": "BUY",
+      "symbol": "AAPL",
+      "shares": 1,
+      "price": 245.27,
+      "total": 245.27
+    },
+    {
+      "date": "2025-10-12T22:57:03.893481",
+      "type": "SELL",
+      "symbol": "GOOGL",
+      "shares": 2,
+      "price": 236.57,
+      "total": 473.14
+    }
+  ]
+}
