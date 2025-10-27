@@ -9,3 +9,7 @@ tensorflow
 plotly
 flask
 requests
+transformers
+torch
+python-dotenv
+tf-keras

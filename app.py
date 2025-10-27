@@ -3,6 +3,15 @@ from datetime import datetime
 import yfinance as yf
 import json
 import os
+from src import news_utils
+# Load environment variables from a .env file if present so developers can
+# keep secrets out of their shell session during local development.
+try:
+    from dotenv import load_dotenv
+    # load .env placed next to this file first
+    load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+except Exception:
+    pass
 
 app = Flask(__name__)
 
@@ -90,6 +99,47 @@ def portfolio_api():
                                    (sum(p["avg_price"]*p["shares"] for p in positions) + portfolio["cash"])) * 100
     }
     return jsonify(summary)
+
+
+@app.route('/api/news_sentiment')
+def news_sentiment():
+    """Fetch recent news headlines for a query and return sentiment labels.
+
+    Query parameters:
+    - q (required): search query (e.g. bitcoin)
+    - limit (optional): maximum number of articles (default 10)
+    """
+    q = request.args.get('q')
+    if not q:
+        return jsonify({"error": "Missing required parameter: q"}), 400
+
+    try:
+        limit = int(request.args.get('limit', 10))
+    except ValueError:
+        limit = 10
+
+    api_key = os.environ.get('NEWSAPI_KEY')
+    if not api_key:
+        return jsonify({"error": "NEWSAPI_KEY not configured in environment"}), 400
+
+    try:
+        # Prefer headlines that contain the query in the title to improve
+        # relevance (reduces unrelated results). If you want broader results set
+        # require_query_in_title=False when calling this endpoint.
+        headlines = news_utils.get_news_headlines_newsapi(api_key, q, limit, require_query_in_title=True)
+    except Exception as e:
+        return jsonify({"error": f"Failed to fetch news: {e}"}), 500
+
+    try:
+        sentiments = news_utils.analyze_sentiment(headlines)
+    except Exception as e:
+        return jsonify({"error": f"Sentiment analysis not available: {e}"}), 500
+
+    articles = []
+    for title, sent in zip(headlines, sentiments):
+        articles.append({"title": title, "sentiment": sent})
+
+    return jsonify({"query": q, "articles": articles})
 
 # Add stock
 @app.route("/add_stock", methods=["POST"])
