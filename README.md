@@ -13,3 +13,34 @@ How to run:
 python .\script\check_btc_notify.py
 ```
 
+News & Sentiment
+-----------------
+
+You can fetch news headlines and run a simple sentiment analysis using the
+new endpoint added to the backend: `/api/news_sentiment?q=QUERY&limit=10`.
+
+1. Get a NewsAPI key from https://newsapi.org and set it in your environment:
+
+```powershell
+setx NEWSAPI_KEY "YOUR_NEWSAPI_KEY"
+# then open a new terminal so the env var is available
+```
+
+2. (Optional) Install Hugging Face transformers & torch to enable model-based
+	sentiment analysis:
+
+```powershell
+pip install transformers torch
+```
+
+3. Call the endpoint (example):
+
+```powershell
+curl "http://localhost:5000/api/news_sentiment?q=bitcoin&limit=5"
+```
+
+If `transformers` is not installed the endpoint will return an error explaining
+how to enable it. The code uses a lazy model initialization so your Flask app
+won't attempt to download large models until the endpoint is hit.
+
+
