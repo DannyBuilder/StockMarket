@@ -1,4 +1,6 @@
 This app is a portfolio tracker with easy to use interface and a build in AI predictor to predict sotck prices.
+A simple Stock Predictor model that uses open/close price for prediction. Includes script for telegram bots and sentiment analysis still in progress.
+Modern front end and design. Has support for portfolio managment and saves your portfolio every time.
 
 
 ## BTC price alert script
