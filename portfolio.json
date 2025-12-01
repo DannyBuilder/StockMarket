@@ -1,32 +1,31 @@
 {
   "stocks": {
     "AAPL": {
-      "shares": 5,
-      "avg_price": 243.61,
-      "total_cost": 1218.05
+      "shares": 11,
+      "avg_price": 262.41,
+      "total_cost": 2886.51,
+      "purchase_date": "2025-10-11T00:40:27.402621"
     },
     "MSFT": {
-      "shares": 3,
+      "shares": 2,
       "avg_price": 510.96,
-      "total_cost": 1532.88
+      "total_cost": 1021.92,
+      "purchase_date": "2025-10-11T00:40:27.402621"
     },
     "TSLA": {
       "shares": 1,
       "avg_price": 413.49,
-      "total_cost": 413.49
-    },
-    "AMD": {
-      "shares": 18,
-      "avg_price": 150,
-      "total_cost": 2700
+      "total_cost": 413.49,
+      "purchase_date": "2025-10-11T00:40:27.402621"
     },
     "SPGI": {
       "shares": 1,
       "avg_price": 486.1,
-      "total_cost": 486.1
+      "total_cost": 486.1,
+      "purchase_date": "2025-10-11T00:40:27.402621"
     }
   },
-  "cash": 2472.9799999999996,
+  "cash": 5301.5199999999995,
   "transactions": [
     {
       "date": "2025-10-11T00:40:27.402621",
@@ -195,6 +194,70 @@
       "shares": 2,
       "price": 236.57,
       "total": 473.14
+    },
+    {
+      "date": "2025-10-27T22:37:52.336809",
+      "type": "SELL",
+      "symbol": "MSFT",
+      "shares": 1,
+      "price": 531.52,
+      "total": 531.52
+    },
+    {
+      "date": "2025-10-27T22:53:58.640576",
+      "type": "BUY",
+      "symbol": "AAPL",
+      "shares": 1,
+      "price": 268.81,
+      "total": 268.81
+    },
+    {
+      "date": "2025-10-27T22:54:08.795111",
+      "type": "BUY",
+      "symbol": "AAPL",
+      "shares": 2,
+      "price": 268.81,
+      "total": 537.62
+    },
+    {
+      "date": "2025-12-01T16:54:22.261181",
+      "type": "SELL",
+      "symbol": "AMD",
+      "shares": 18,
+      "price": 218.62,
+      "total": 3935.16
+    },
+    {
+      "date": "2025-12-01T16:54:33.132358",
+      "type": "BUY",
+      "symbol": "AAPL",
+      "shares": 1,
+      "price": 277.12,
+      "total": 277.12
+    },
+    {
+      "date": "2025-12-01T16:54:40.143329",
+      "type": "BUY",
+      "symbol": "AAPL",
+      "shares": 1,
+      "price": 277.16,
+      "total": 277.16
+    },
+    {
+      "date": "2025-12-01T16:56:47.691466",
+      "type": "BUY",
+      "symbol": "AAPL",
+      "shares": 3,
+      "price": 277.55,
+      "total": 832.65
+    },
+    {
+      "date": "2025-12-01T16:56:54.879580",
+      "type": "SELL",
+      "symbol": "AAPL",
+      "shares": 2,
+      "price": 277.61,
+      "total": 555.22
     }
   ]
 }
