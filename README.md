@@ -2,6 +2,8 @@ This app is a portfolio tracker with easy to use interface and a build in AI pre
 A simple Stock Predictor model that uses open/close price for prediction. Includes script for telegram bots and sentiment analysis still in progress.
 Modern front end and design. Has support for portfolio managment and saves your portfolio every time.
 
+This app is for personal use. The portfolio is a test portfolio. This is not financial advice.
+
 
 ## BTC price alert script
 
@@ -14,6 +16,7 @@ How to run:
 ```
 python .\script\check_btc_notify.py
 ```
+Run sentiment: "http://localhost:5000/api/news_sentiment?q=bitcoin&limit=5"
 
 News & Sentiment
 -----------------
@@ -44,5 +47,3 @@ curl "http://localhost:5000/api/news_sentiment?q=bitcoin&limit=5"
 If `transformers` is not installed the endpoint will return an error explaining
 how to enable it. The code uses a lazy model initialization so your Flask app
 won't attempt to download large models until the endpoint is hit.
-
-

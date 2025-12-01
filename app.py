@@ -75,8 +75,42 @@ def portfolio_api():
     positions = get_positions_list(portfolio)
 
     total_value = portfolio["cash"]
+    now = datetime.now()
+    start_of_year = datetime(now.year, 1, 1)
+
     for p in positions:
         current_price = get_current_price(p["symbol"])
+        stock_data = portfolio["stocks"].get(p["symbol"], {})
+        purchase_date_str = stock_data.get("purchase_date")
+        calc_start_date = start_of_year
+        symbol = p["symbol"]
+        if purchase_date_str:
+            try:
+                purchase_date = datetime.fromisoformat(purchase_date_str)
+                if purchase_date > start_of_year:
+                    calc_start_date = purchase_date
+            except ValueError:
+                pass
+        try:
+            ticker = yf.Ticker(symbol)
+            history_start = calc_start_date.strftime("%Y-%m-%d")
+            hist = ticker.history(start=history_start)
+            
+            if not hist.empty:
+                current_price = round(hist['Close'].iloc[-1], 2)
+                start_price = hist['Close'].iloc[0]
+                if start_price > 0:
+                    ytd_val = ((current_price - start_price) / start_price) * 100
+                    p["ytd_percent"] = round(ytd_val, 2)
+            else:
+                current_price = 0
+                p["ytd_percent"] = 0
+                
+        except Exception as e:
+            print(f"Error fetching data for {symbol}: {e}")
+            current_price = 0
+            p["ytd_percent"] = 0
+
         if current_price:
             p["current_price"] = current_price
             p["market_value"] = p["shares"] * current_price
@@ -171,7 +205,8 @@ def add_stock():
         portfolio["stocks"][symbol] = {
             "shares": shares,
             "avg_price": current_price,
-            "total_cost": round(current_price * shares, 2)
+            "total_cost": round(current_price * shares, 2),
+            "purchase_date": datetime.now().isoformat()
         }
 
     portfolio["transactions"].append({
@@ -180,7 +215,8 @@ def add_stock():
         "symbol": symbol,
         "shares": shares,
         "price": current_price,
-        "total": round(current_price * shares, 2)
+        "total": round(current_price * shares, 2),
+        "purchase_date": datetime.now().isoformat()
     })
 
     portfolio["cash"] -= cost
